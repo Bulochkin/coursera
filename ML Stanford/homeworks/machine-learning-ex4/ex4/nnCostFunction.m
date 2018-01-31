@@ -71,7 +71,11 @@ h0 = sigmoid (a2 * Theta2');
 y_ones = sparse (1:rows (y), y, 1);
 J_vector = -y_ones .* log(h0) - (1 - y_ones) .* log(1 - h0);
 
-J = sum(sum(J_vector)) / m;
+Th1_NF = Theta1( : , 2 : end);
+Th2_NF = Theta2( : , 2 : end);
+
+J = sum(sum(J_vector)) / m + lambda / (2 * m) * (sum(sum(Th1_NF.^ 2)) + sum(sum(Th2_NF.^ 2)));
+
 % -------------------------------------------------------------
 
 % =========================================================================
