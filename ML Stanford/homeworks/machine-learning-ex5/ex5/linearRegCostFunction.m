@@ -24,13 +24,10 @@ theta_no_first = theta(2 : end);
 
 J = sum(diff_value(:) .^ 2) / (2 * m) + sum(theta_no_first(:) .^ 2) * lambda / (2 * m);
 
-diff_value_mul_1 = diff_value .* X(: , 1);
-diff_value_mul_2 = diff_value .* X(: , 2 : end);
-
 diff_value_mul = diff_value .* X;
-grad = sum(diff_value_mul(: , :)) / m ;
+grad = sum(diff_value_mul, 1) / m ;
 
-for it = 2 : size(grad(:)),
+for it = 2 : size(grad, 2),
   grad(it) += lambda * theta(it) / m;
 end;
 
